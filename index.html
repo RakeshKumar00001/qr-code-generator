@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <form id="urlForm">
+        <label for="urlInput">Enter URL:</label><br>
+        <input type="text" id="urlInput" name="urlInput" required><br><br>
+        <input type="submit" value="Generate QR Code">
+    </form>
+    <div id="qrCode"></div>
+
+    <script>
+        document.getElementById('urlForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+            generateQRCode();
+        });
+
+        function generateQRCode() {
+            var url = document.getElementById('urlInput').value;
+            var qrCodeImg = document.createElement('img');
+            qrCodeImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=' + encodeURIComponent(url);
+            qrCodeImg.alt = 'QR Code';
+            document.getElementById('qrCode').innerHTML = '';
+            document.getElementById('qrCode').appendChild(qrCodeImg);
+        }
+    </script>
+</body>
+</html>
